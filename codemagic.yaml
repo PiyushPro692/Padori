@@ -1,3 +1,13 @@
-git add codemagic.yaml
-git commit -m 'Add first workflow'
-git push
+workflows:
+  android-build:
+    name: Padori Android Build
+    instance_type: mac_mini_m2
+    environment:
+      java: 17
+    scripts:
+      - name: Build APK
+        script: |
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/apk/debug/*.apk
